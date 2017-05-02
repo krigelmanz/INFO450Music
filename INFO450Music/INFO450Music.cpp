@@ -44,20 +44,19 @@ public:
 	int ReadInventoryList(string filename);
 };
 
-// default constructor - initialize empty
 Inventory::Inventory()
 {
 	ArtistName = ""; ItemName = "";
 	next = NULL;
 }
-// overload constructor inialize w/ values
+
 Inventory::Inventory(string num, string name)
 {
 	ArtistName = num;
 	ItemName = name;
 	next = NULL;
 }
-// Capture Item from end users
+
 void Inventory::CaptureInventoryItem()
 {
 	cout << "Artist Name?  -->";
@@ -66,14 +65,11 @@ void Inventory::CaptureInventoryItem()
 	getline(cin, ItemName);
 }
 
-
-// Display item to console
 void Inventory::ShowInventoryItem()
 {
 	cout << "Artist : " << ArtistName << " Song : " << ItemName << endl;
 }
 
-// Save inventory item to file given input file stream
 int Inventory::SaveInventoryItem(ofstream& outfile)
 {
 	if (outfile.is_open())
@@ -85,7 +81,6 @@ int Inventory::SaveInventoryItem(ofstream& outfile)
 		return WRITEERROR;
 }
 
-// Inventory LIst constructor -allocate default space for array
 InventoryList::InventoryList()
 {
 
@@ -94,7 +89,7 @@ InventoryList::InventoryList()
 	tail = NULL;
 
 }
-// deconstructor - free allocated memory
+
 InventoryList::~InventoryList()
 {
 	Inventory *ptr = head;
@@ -120,11 +115,9 @@ void InventoryList::AddNodeToEnd(Inventory *newnode)
 	}
 }
 
-// get user input for the list
 void InventoryList::GetUserInput()
 {
 	string answer = "Y";
-	// tbd check to see if i have enought space
 	cout << "enter new song Y/N?" << endl;
 	getline(cin, answer);
 	while (answer == "Y" || answer == "y")
@@ -155,7 +148,6 @@ void InventoryList::DeleteItem(Inventory *s) {
 	}
 }
 
-// Show list to the console
 void InventoryList::PlaySong()
 {
 	string Input;
@@ -163,7 +155,7 @@ void InventoryList::PlaySong()
 	Inventory *ptr = head;
 	Inventory *tbd = NULL;
 	if (head == NULL)
-		return;  // cuase its empty!
+		return;
 
 	while (ptr != NULL)
 	{
@@ -218,12 +210,11 @@ void InventoryList::PlaySong()
 	}
 }
 
-// Show list to the console
 void InventoryList::ShowInventoryList()
 {
 	Inventory *ptr = head;
 	if (head == NULL)
-		return;  // cuase its empty!
+		return;
 
 	while (ptr != NULL)
 	{
@@ -232,7 +223,6 @@ void InventoryList::ShowInventoryList()
 	}
 }
 
-// Save entire list to file, given full-path file name
 int InventoryList::SaveInventoryList(string filename)
 {
 	ofstream output(filename, ios::trunc);
@@ -253,8 +243,7 @@ int InventoryList::SaveInventoryList(string filename)
 	}
 	return 0;
 }
-// Read inventory list from a file, given full-path filename
-// If file not found or error, return error code
+
 int InventoryList::ReadInventoryList(string filename)
 {
 	string inum, iname;
